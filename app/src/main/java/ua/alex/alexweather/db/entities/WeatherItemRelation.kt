@@ -1,4 +1,4 @@
-package ua.alex.alexweather.db
+package ua.alex.alexweather.db.entities
 
 import android.arch.persistence.room.ColumnInfo
 import android.arch.persistence.room.Embedded
@@ -19,7 +19,7 @@ data class WeatherItemRelation(
         var rain: Rain? = null,
 
         @ColumnInfo(name = "dt_txt")
-        var dtTxt: String? = null,
+        var dtTxt: String? = "",
 
         @Embedded
         @ColumnInfo(name = "main")

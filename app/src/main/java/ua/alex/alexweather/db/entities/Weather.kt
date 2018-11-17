@@ -1,4 +1,4 @@
-package ua.alex.alexweather.db
+package ua.alex.alexweather.db.entities
 
 import android.arch.persistence.room.ColumnInfo
 import android.arch.persistence.room.Entity

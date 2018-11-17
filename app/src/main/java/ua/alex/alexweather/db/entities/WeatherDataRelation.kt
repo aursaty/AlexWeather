@@ -1,10 +1,9 @@
-package ua.alex.alexweather.db
+package ua.alex.alexweather.db.entities
 
 import android.arch.persistence.room.ColumnInfo
 import android.arch.persistence.room.Embedded
 import android.arch.persistence.room.Entity
 import android.arch.persistence.room.PrimaryKey
-import ua.alex.alexweather.models.WeatherItem
 
 @Entity
 data class WeatherDataRelation(

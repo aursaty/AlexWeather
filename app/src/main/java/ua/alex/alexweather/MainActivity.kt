@@ -1,5 +1,6 @@
 package ua.alex.alexweather
 
+import android.arch.persistence.room.Room
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.os.Looper
@@ -12,6 +13,7 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.*
 import ua.alex.alexweather.api.IWeatherApi
+import ua.alex.alexweather.db.AppDatabase
 import ua.alex.alexweather.models.WeatherData
 import ua.alex.alexweather.repository.WeatherRepository
 
@@ -29,7 +31,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        if (ActivityCompat.shouldShowRequestPermissionRationale(this,android.Manifest.permission.ACCESS_FINE_LOCATION))
+        if (ActivityCompat.shouldShowRequestPermissionRationale(this, android.Manifest.permission.ACCESS_FINE_LOCATION))
             ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), REQUEST_CODE)
         else {
             requestLocation()
@@ -43,12 +45,13 @@ class MainActivity : AppCompatActivity() {
             fusedLocationProviderClient.requestLocationUpdates(locationRequest, locationCallback, Looper.myLooper())
         }
 
+
     }
 
     private fun buildLocationCallBack() {
-        locationCallback = object: LocationCallback() {
+        locationCallback = object : LocationCallback() {
             override fun onLocationResult(p0: LocationResult?) {
-                val location = p0!!.locations[p0.locations.size-1]
+                val location = p0!!.locations[p0.locations.size - 1]
 
                 fetchWeather(location.latitude, location.longitude)
             }
@@ -59,14 +62,23 @@ class MainActivity : AppCompatActivity() {
         val compositeDisposable = CompositeDisposable()
         compositeDisposable
                 .add(WeatherRepository(IWeatherApi.create())
-                .getWeather(latitude, longitude)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe { data -> updateUI(data) })
+                        .getWeather(latitude, longitude)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe { data -> updateUI(data) })
     }
 
     private fun updateUI(data: WeatherData?) {
         tv_location.text = data?.city?.name
+
+        val db = Room.databaseBuilder(
+                applicationContext,
+                AppDatabase::class.java,
+                "weather-db"
+        ).build()
+
+//        if (data != null)
+//            db.weatherDao().insertAll(data)
     }
 
     private fun requestLocation() {
@@ -85,8 +97,7 @@ class MainActivity : AppCompatActivity() {
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
 
-        when (requestCode)
-        {
+        when (requestCode) {
             REQUEST_CODE -> {
                 if (grantResults.isNotEmpty()) {
                     if (grantResults[0] == PackageManager.PERMISSION_GRANTED)
