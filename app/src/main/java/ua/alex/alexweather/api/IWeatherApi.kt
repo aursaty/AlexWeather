@@ -14,12 +14,12 @@ import ua.alex.alexweather.models.WeatherData
 
 interface IWeatherApi {
     @GET("$PATH_DATA/$PATH_API_VERSION/$FORECAST")
-    fun getForecast(@Query(ApiSettings.PATH_LAT) lat: Int,
-                    @Query(ApiSettings.PATH_LON) lon: Int,
+    fun getForecast(@Query(ApiSettings.PATH_LAT) lat: Double,
+                    @Query(ApiSettings.PATH_LON) lon: Double,
                     @Query(ApiSettings.PATH_API_KEY) appid: String = ApiSettings.API_KEY): Observable<WeatherData>
 
     companion object {
-        private const val BASE_URL = "https://samples.openweathermap.org/"
+        private const val BASE_URL = "https://api.openweathermap.org/"
 
         fun create(): IWeatherApi {
             val retrofit = Retrofit.Builder()

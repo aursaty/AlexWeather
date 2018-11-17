@@ -10,5 +10,5 @@ object ApiSettings {
     const val PATH_API_VERSION = "2.5"
     const val PATH_DATA = "data"
 
-    const val API_KEY = "b6907d289e10d714a6e88b30761fae22"
+    const val API_KEY = "c86cc33477e52f0df64ae173bdfc3def"
 }
