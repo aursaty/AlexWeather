@@ -1,29 +1,41 @@
 package ua.alex.alexweather.models
 
-import javax.annotation.Generated
 import com.google.gson.annotations.SerializedName
+import javax.annotation.Generated
 
 @Generated("com.robohorse.robopojogenerator")
 class WeatherItem {
 
-    @SerializedName("icon")
-    var icon: String? = null
+    @SerializedName("dt")
+    var dt: Int = 0
 
-    @SerializedName("description")
-    var description: String? = null
+    @SerializedName("rain")
+    var rain: Rain? = null
+
+    @SerializedName("dt_txt")
+    var dtTxt: String? = null
+
+    @SerializedName("weather")
+    var weather: List<Weather>? = null
 
     @SerializedName("main")
-    var main: String? = null
+    var main: Main? = null
 
-    @SerializedName("id")
-    var id: Int = 0
+    @SerializedName("clouds")
+    var clouds: Clouds? = null
+
+    @SerializedName("wind")
+    var wind: Wind? = null
 
     override fun toString(): String {
         return "WeatherItem{" +
-                "icon = '" + icon + '\''.toString() +
-                ",description = '" + description + '\''.toString() +
+                "dt = '" + dt + '\''.toString() +
+                ",rain = '" + rain + '\''.toString() +
+                ",dt_txt = '" + dtTxt + '\''.toString() +
+                ",weather = '" + weather + '\''.toString() +
                 ",main = '" + main + '\''.toString() +
-                ",id = '" + id + '\''.toString() +
+                ",clouds = '" + clouds + '\''.toString() +
+                ",wind = '" + wind + '\''.toString() +
                 "}"
     }
 }

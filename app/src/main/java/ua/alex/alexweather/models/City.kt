@@ -2,6 +2,7 @@ package ua.alex.alexweather.models
 
 import javax.annotation.Generated
 import com.google.gson.annotations.SerializedName
+import ua.alex.alexweather.db.Coord
 
 @Generated("com.robohorse.robopojogenerator")
 class City {

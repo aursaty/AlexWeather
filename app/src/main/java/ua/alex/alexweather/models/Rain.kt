@@ -1,11 +1,10 @@
 package ua.alex.alexweather.models
 
-import javax.annotation.Generated
+import com.google.gson.annotations.SerializedName
 
-@Generated("com.robohorse.robopojogenerator")
-class Rain {
+data class Rain (
 
-    override fun toString(): String {
-        return "Rain{" + "}"
-    }
-}
+        @SerializedName("3h")
+        var jsonMember3h: Double = 0.toDouble()
+
+)

@@ -2,6 +2,7 @@ package ua.alex.alexweather.models
 
 import javax.annotation.Generated
 import com.google.gson.annotations.SerializedName
+import ua.alex.alexweather.db.City
 
 @Generated("com.robohorse.robopojogenerator")
 class WeatherData {
@@ -12,21 +13,13 @@ class WeatherData {
     @SerializedName("cnt")
     var cnt: Int = 0
 
-    @SerializedName("cod")
-    var cod: String? = null
-
-    @SerializedName("message")
-    var message: Double = 0.toDouble()
-
     @SerializedName("list")
-    var list: List<ListItem>? = null
+    var list: List<WeatherItem>? = null
 
     override fun toString(): String {
         return "WeatherData{" +
                 "city = '" + city + '\''.toString() +
                 ",cnt = '" + cnt + '\''.toString() +
-                ",cod = '" + cod + '\''.toString() +
-                ",message = '" + message + '\''.toString() +
                 ",list = '" + list + '\''.toString() +
                 "}"
     }

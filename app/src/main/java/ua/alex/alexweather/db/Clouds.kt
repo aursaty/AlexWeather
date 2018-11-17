@@ -1,19 +1,17 @@
-package ua.alex.alexweather.models
+package ua.alex.alexweather.db
 
+import android.arch.persistence.room.ColumnInfo
 import android.arch.persistence.room.Entity
 import android.arch.persistence.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
 @Entity
-data class Wind(
+data class Clouds(
 
         @PrimaryKey(autoGenerate = true)
         var uid: Long,
 
-        @SerializedName("deg")
-        var deg: Double = 0.toDouble(),
-
-        @SerializedName("speed")
-        var speed: Double = 0.toDouble()
+        @ColumnInfo(name = "all")
+        var all: Int = 0
 
 )
