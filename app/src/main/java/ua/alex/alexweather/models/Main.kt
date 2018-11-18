@@ -16,7 +16,7 @@ class Main {
     var grndLevel: Double = 0.toDouble()
 
     @SerializedName("temp_kf")
-    var tempKf: Int = 0
+    var tempKf: Double = 0.toDouble()
 
     @SerializedName("humidity")
     var humidity: Int = 0

@@ -1,18 +1,52 @@
+//package ua.alex.alexweather.db.entities
+//
+//import android.arch.persistence.room.*
+//
+////@Entity(foreignKeys = [ForeignKey(
+////        entity = WeatherDataRelation::class,
+////        parentColumns = [("uid")],
+////        childColumns = [("uid")]
+////)])
+//data class WeatherData(
+//
+////        @Embedded
+////        var weatherDataRelation: WeatherDataRelation,
+////        @PrimaryKey(autoGenerate = true)
+//        var uid: Long,
+//
+//        @Embedded
+//        var city: City? = null,
+//
+//        @ColumnInfo(name = "cnt")
+//        var cnt: Int = 0,
+//
+////        @Relation(parentColumn = "uid", entity = WeatherItem::class, entityColumn = "uid")
+//        @ColumnInfo(name = "list")
+//        var weather: List<WeatherItem>? = listOf()
+//
+//)
 package ua.alex.alexweather.db.entities
 
-import android.arch.persistence.room.*
+import javax.annotation.Generated
+import com.google.gson.annotations.SerializedName
 
-@Entity(foreignKeys = [ForeignKey(
-        entity = WeatherDataRelation::class,
-        parentColumns = [("uid")],
-        childColumns = [("uid")]
-)])
-data class WeatherData (
+@Generated("com.robohorse.robopojogenerator")
+class WeatherData {
 
-        @Embedded
-        var weatherDataRelation: WeatherDataRelation,
+    @SerializedName("city")
+    var city: City? = null
 
-        @Relation(parentColumn = "uid", entity = WeatherItem::class, entityColumn = "uid")
-        @ColumnInfo(name = "list")
-        var weather: List<WeatherItem>? = listOf()
-)
+    @SerializedName("cnt")
+    var cnt: Int = 0
+
+    @SerializedName("list")
+    var list: List<WeatherItem>? = null
+
+    override fun toString(): String {
+        return "WeatherData{" +
+                "city = '" + city + '\''.toString() +
+                ",cnt = '" + cnt + '\''.toString() +
+                ",list = '" + list + '\''.toString() +
+                "}"
+    }
+}

@@ -9,7 +9,7 @@ import com.google.gson.annotations.SerializedName
 data class Clouds(
 
         @PrimaryKey(autoGenerate = true)
-        var uid: Long,
+        var clouds_id: Long,
 
         @ColumnInfo(name = "all")
         var all: Int = 0

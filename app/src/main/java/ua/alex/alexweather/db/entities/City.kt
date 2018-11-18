@@ -5,8 +5,9 @@ import android.arch.persistence.room.*
 @Entity
 data class City(
 
-        @PrimaryKey(autoGenerate = true)
-        var uid: Long,
+        @PrimaryKey
+        @ColumnInfo(name = "id")
+        var id: Int = 0,
 
         @ColumnInfo(name = "country")
         var country: String? = "",
@@ -15,8 +16,6 @@ data class City(
         var coord: Coord? = null,
 
         @ColumnInfo(name = "name")
-        var name: String? = "",
+        var name: String? = ""
 
-        @ColumnInfo(name = "id")
-        var id: Int = 0
 )

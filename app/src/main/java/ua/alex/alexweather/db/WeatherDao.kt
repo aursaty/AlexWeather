@@ -4,21 +4,17 @@ import android.arch.persistence.room.Dao
 import android.arch.persistence.room.Delete
 import android.arch.persistence.room.Insert
 import android.arch.persistence.room.Query
-import ua.alex.alexweather.db.entities.WeatherData
-import ua.alex.alexweather.db.entities.WeatherItem
+import ua.alex.alexweather.db.entities.WeatherItemRelation
 
 @Dao
 interface WeatherDao {
-    @Query("SELECT * FROM WeatherData")
-    fun getAll(): WeatherData
 
-
-    @Query("SELECT * FROM WeatherItem")
-    fun getAllWeather(): List<WeatherItem>
+    @Query("SELECT * FROM WeatherItemRelation")
+    fun getAllWeather(): List<WeatherItemRelation>
 
     @Insert
-    fun insertAll(weatherData: WeatherData)
+    fun insertAll(weatherData: List<WeatherItemRelation>)
 
-    @Delete
-    fun delete()
+//    @Delete
+//    fun delete()
 }

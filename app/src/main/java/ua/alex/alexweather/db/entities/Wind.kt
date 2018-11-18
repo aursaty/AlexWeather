@@ -2,14 +2,18 @@ package ua.alex.alexweather.db.entities
 
 import android.arch.persistence.room.ColumnInfo
 import android.arch.persistence.room.Entity
+import android.arch.persistence.room.PrimaryKey
 
 @Entity
-data class Wind (
+data class Wind(
 
-    @ColumnInfo(name = "deg")
-    var deg: Double = 0.toDouble(),
+        @PrimaryKey(autoGenerate = true)
+        var wind_id: Long,
 
-    @ColumnInfo(name = "speed")
-    var speed: Double = 0.toDouble()
+        @ColumnInfo(name = "deg")
+        var deg: Double = 0.toDouble(),
+
+        @ColumnInfo(name = "speed")
+        var speed: Double = 0.toDouble()
 
 )

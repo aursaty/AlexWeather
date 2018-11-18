@@ -14,7 +14,8 @@ import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.*
 import ua.alex.alexweather.api.IWeatherApi
 import ua.alex.alexweather.db.AppDatabase
-import ua.alex.alexweather.models.WeatherData
+import ua.alex.alexweather.db.WeatherConverter
+import ua.alex.alexweather.db.entities.WeatherData
 import ua.alex.alexweather.repository.WeatherRepository
 
 class MainActivity : AppCompatActivity() {
@@ -71,14 +72,17 @@ class MainActivity : AppCompatActivity() {
     private fun updateUI(data: WeatherData?) {
         tv_location.text = data?.city?.name
 
-        val db = Room.databaseBuilder(
-                applicationContext,
-                AppDatabase::class.java,
-                "weather-db"
-        ).build()
+        if (data != null) {
+            val weatherData = WeatherConverter.convert(data)
 
-//        if (data != null)
-//            db.weatherDao().insertAll(data)
+            val db = Room.databaseBuilder(
+                    applicationContext,
+                    AppDatabase::class.java,
+                    "weather-db"
+            ).build()
+
+            db.weatherDao().insertAll(weatherData)
+        }
     }
 
     private fun requestLocation() {

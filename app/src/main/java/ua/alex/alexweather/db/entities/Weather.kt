@@ -7,19 +7,17 @@ import android.arch.persistence.room.PrimaryKey
 @Entity
 data class Weather(
 
-        @PrimaryKey(autoGenerate = true)
-        var uid: Long,
+        @PrimaryKey
+        @ColumnInfo(name = "id")
+        var weather_id: Int,
 
         @ColumnInfo(name = "icon")
-        var icon: String? = "",
+        var icon: String?,
 
         @ColumnInfo(name = "description")
-        var description: String? = "",
+        var description: String?,
 
         @ColumnInfo(name = "main")
-        var main: String? = "",
-
-        @ColumnInfo(name = "id")
-        var id: Int = 0
+        var main: String?
 
 )

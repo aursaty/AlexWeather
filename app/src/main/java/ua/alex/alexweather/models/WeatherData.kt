@@ -3,6 +3,7 @@ package ua.alex.alexweather.models
 import javax.annotation.Generated
 import com.google.gson.annotations.SerializedName
 import ua.alex.alexweather.db.entities.City
+import ua.alex.alexweather.db.entities.WeatherItem
 
 @Generated("com.robohorse.robopojogenerator")
 class WeatherData {

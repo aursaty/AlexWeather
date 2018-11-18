@@ -9,7 +9,7 @@ import retrofit2.http.Query
 import ua.alex.alexweather.api.ApiSettings.FORECAST
 import ua.alex.alexweather.api.ApiSettings.PATH_API_VERSION
 import ua.alex.alexweather.api.ApiSettings.PATH_DATA
-import ua.alex.alexweather.models.WeatherData
+import ua.alex.alexweather.db.entities.WeatherData
 
 interface IWeatherApi {
     @GET("$PATH_DATA/$PATH_API_VERSION/$FORECAST")
