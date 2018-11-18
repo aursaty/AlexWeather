@@ -2,9 +2,9 @@ package ua.alex.alexweather.db
 
 import android.arch.persistence.room.Database
 import android.arch.persistence.room.RoomDatabase
-import ua.alex.alexweather.db.entities.WeatherItemRelation
+import ua.alex.alexweather.db.entities.WeatherItemEntity
 
-@Database(entities = [WeatherItemRelation::class], version = 1)
+@Database(entities = [WeatherItemEntity::class], version = 1)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun weatherDao() : WeatherDao
 }

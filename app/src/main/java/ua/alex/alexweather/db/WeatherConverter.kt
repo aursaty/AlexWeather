@@ -1,12 +1,12 @@
 package ua.alex.alexweather.db
 
 import ua.alex.alexweather.db.entities.WeatherData
-import ua.alex.alexweather.db.entities.WeatherItemRelation
+import ua.alex.alexweather.db.entities.WeatherItemEntity
 
 object WeatherConverter {
-    fun convert(data: WeatherData): List<WeatherItemRelation> {
-        var result = emptyList<WeatherItemRelation>()
-        data.list?.forEach { w -> result += WeatherItemRelation(
+    fun convert(data: WeatherData): List<WeatherItemEntity> {
+        var result = emptyList<WeatherItemEntity>()
+        data.list?.forEach { w -> result += WeatherItemEntity(
                 dt = w.dt,
                 rain = w.rain,
                 dtTxt = w.dtTxt,

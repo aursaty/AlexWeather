@@ -7,16 +7,13 @@ import android.arch.persistence.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
 @Entity
-data class WeatherItemRelation(
+data class WeatherItemEntity(
 
-        @PrimaryKey(autoGenerate = true)
-        var uid: Long = 0,
-
+        @PrimaryKey
         @ColumnInfo(name = "dt")
         var dt: Int,
 
         @Embedded
-//        @ColumnInfo(name = "rain")
         var rain: Rain?,
 
         @SerializedName("dt_txt")
@@ -24,19 +21,15 @@ data class WeatherItemRelation(
         var dtTxt: String?,
 
         @Embedded
-//        @ColumnInfo(name = "main")
         var main: Main?,
 
         @Embedded
-//        @ColumnInfo(name = "clouds")
         var clouds: Clouds?,
 
         @Embedded
-//        @ColumnInfo(name = "wind")
         var wind: Wind?,
 
         @Embedded
-//        @ColumnInfo(name = "weather")
         var weather: Weather?
 
 )

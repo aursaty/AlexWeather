@@ -28,7 +28,7 @@ class WeatherItem {
     var wind: Wind? = null
 
     override fun toString(): String {
-        return "WeatherItem{" +
+        return "WeatherItemModel{" +
                 "dt = '" + dt + '\''.toString() +
                 ",rain = '" + rain + '\''.toString() +
                 ",dt_txt = '" + dtTxt + '\''.toString() +

@@ -4,14 +4,14 @@
 //
 //
 //@Entity(foreignKeys = [ForeignKey(
-//        entity = WeatherItemRelation::class,
+//        entity = WeatherItemEntity::class,
 //        parentColumns = [("uid")],
 //        childColumns = [("uid")]
 //)])
-//data class WeatherItem (
+//data class WeatherItemModel (
 //
 //        @Embedded
-//        var weatherItemRelation: WeatherItemRelation,
+//        var weatherItemRelation: WeatherItemEntity,
 //
 //        @Relation(parentColumn = "uid", entity = Weather::class, entityColumn = "uid")
 //        @ColumnInfo(name = "weather")
@@ -23,7 +23,7 @@ import com.google.gson.annotations.SerializedName
 import javax.annotation.Generated
 
 @Generated("com.robohorse.robopojogenerator")
-class WeatherItem {
+class WeatherItemModel {
 
     @SerializedName("dt")
     var dt: Int = 0
@@ -47,7 +47,7 @@ class WeatherItem {
     var wind: Wind? = null
 
     override fun toString(): String {
-        return "WeatherItem{" +
+        return "WeatherItemModel{" +
                 "dt = '" + dt + '\''.toString() +
                 ",rain = '" + rain + '\''.toString() +
                 ",dt_txt = '" + dtTxt + '\''.toString() +

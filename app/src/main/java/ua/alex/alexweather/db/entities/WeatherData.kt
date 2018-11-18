@@ -20,9 +20,9 @@
 //        @ColumnInfo(name = "cnt")
 //        var cnt: Int = 0,
 //
-////        @Relation(parentColumn = "uid", entity = WeatherItem::class, entityColumn = "uid")
+////        @Relation(parentColumn = "uid", entity = WeatherItemModel::class, entityColumn = "uid")
 //        @ColumnInfo(name = "list")
-//        var weather: List<WeatherItem>? = listOf()
+//        var weather: List<WeatherItemModel>? = listOf()
 //
 //)
 package ua.alex.alexweather.db.entities
@@ -40,7 +40,7 @@ class WeatherData {
     var cnt: Int = 0
 
     @SerializedName("list")
-    var list: List<WeatherItem>? = null
+    var list: List<WeatherItemModel>? = null
 
     override fun toString(): String {
         return "WeatherData{" +

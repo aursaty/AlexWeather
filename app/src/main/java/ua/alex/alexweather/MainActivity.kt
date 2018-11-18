@@ -15,14 +15,19 @@ import kotlinx.android.synthetic.main.activity_main.*
 import ua.alex.alexweather.api.IWeatherApi
 import ua.alex.alexweather.db.AppDatabase
 import ua.alex.alexweather.db.WeatherConverter
-import ua.alex.alexweather.db.entities.WeatherData
+import ua.alex.alexweather.db.entities.WeatherItemEntity
 import ua.alex.alexweather.repository.WeatherRepository
+import ua.alex.alexweather.util.NetworkUtil
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var locationRequest: LocationRequest
     private lateinit var locationCallback: LocationCallback
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
+
+    private lateinit var weatherDb: AppDatabase
+
+    private lateinit var weatherRepository: WeatherRepository
 
     companion object {
         const val REQUEST_CODE = 1000
@@ -32,19 +37,36 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        if (ActivityCompat.shouldShowRequestPermissionRationale(this, android.Manifest.permission.ACCESS_FINE_LOCATION))
-            ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), REQUEST_CODE)
-        else {
-            requestLocation()
+        weatherDb = Room.databaseBuilder(
+                applicationContext,
+                AppDatabase::class.java,
+                "weather-db"
+        ).build()
 
-            fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
+//        if (NetworkUtil.isOnline(this)) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                            android.Manifest.permission.ACCESS_FINE_LOCATION))
+                ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), REQUEST_CODE)
+            else {
+                requestLocation()
 
-            if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-                    && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
-                ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), MainActivity.REQUEST_CODE)
+                fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
 
-            fusedLocationProviderClient.requestLocationUpdates(locationRequest, locationCallback, Looper.myLooper())
-        }
+                if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                        && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+                    ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), MainActivity.REQUEST_CODE)
+
+                fusedLocationProviderClient.requestLocationUpdates(locationRequest, locationCallback, Looper.myLooper())
+            }
+//        } else {
+//            weatherRepository = WeatherRepository(null, weatherDb.weatherDao())
+//            val compositeDisposable = CompositeDisposable()
+//            compositeDisposable
+//                    .add(weatherRepository.getWeatherFromDb()
+//                            .subscribeOn(Schedulers.io())
+//                            .observeOn(AndroidSchedulers.mainThread())
+//                            .subscribe { updateUI(it) })
+//        }
 
 
     }
@@ -62,27 +84,15 @@ class MainActivity : AppCompatActivity() {
     private fun fetchWeather(latitude: Double, longitude: Double) {
         val compositeDisposable = CompositeDisposable()
         compositeDisposable
-                .add(WeatherRepository(IWeatherApi.create())
-                        .getWeather(latitude, longitude)
+                .add(WeatherRepository(IWeatherApi.create(), weatherDb.weatherDao())
+                        .getWeatherFromApi(latitude, longitude)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe { data -> updateUI(data) })
+                        .subscribe { data -> updateUI(WeatherConverter.convert(data)) })
     }
 
-    private fun updateUI(data: WeatherData?) {
-        tv_location.text = data?.city?.name
-
-        if (data != null) {
-            val weatherData = WeatherConverter.convert(data)
-
-            val db = Room.databaseBuilder(
-                    applicationContext,
-                    AppDatabase::class.java,
-                    "weather-db"
-            ).build()
-
-            db.weatherDao().insertAll(weatherData)
-        }
+    private fun updateUI(data: List<WeatherItemEntity>) {
+        tv_location.text = data.size.toString()
     }
 
     private fun requestLocation() {
