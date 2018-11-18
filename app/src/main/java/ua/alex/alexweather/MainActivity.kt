@@ -7,6 +7,9 @@ import android.os.Looper
 import android.support.v4.app.ActivityCompat
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
+import android.view.View
+import android.widget.ListView
+import android.widget.ProgressBar
 import android.widget.Toast
 import com.google.android.gms.location.*
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -38,6 +41,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        setProgressBar()
 
         weatherDb = Room.databaseBuilder(
                 applicationContext,
@@ -94,9 +99,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun updateUI(data: List<WeatherItemEntity>) {
+        progress_bar.visibility = View.GONE
+
+        rv_weather_list.visibility = View.VISIBLE
         rv_weather_list.layoutManager = LinearLayoutManager(this)
 
-        rv_weather_list.adapter = WeatherAdapter(data, this)
+        rv_weather_list.adapter = WeatherAdapter(data.filter { it.dt * 1000 < System.currentTimeMillis() + 259200 }, this)
     }
 
     private fun requestLocation() {
@@ -125,5 +133,10 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    private fun setProgressBar() {
+        progress_bar.visibility = View.VISIBLE
+        rv_weather_list.visibility = View.GONE
     }
 }

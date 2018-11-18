@@ -14,7 +14,8 @@ class WeatherRepository(private val weatherApi: IWeatherApi?, private val weathe
 
 
 //    fun getWeather(lat: Double, lon: Double): Observable<List<WeatherItemEntity>> {
-//        return Observable.concatArray(getWeatherFromApi(lat, lon),
+//        return Observable.concatArray(
+//                getWeatherFromApi(lat, lon),
 //                getWeatherFromDb())
 //    }
 //
