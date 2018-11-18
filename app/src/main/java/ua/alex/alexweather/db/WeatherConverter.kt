@@ -1,7 +1,7 @@
 package ua.alex.alexweather.db
 
-import ua.alex.alexweather.db.entities.WeatherData
-import ua.alex.alexweather.db.entities.WeatherItemEntity
+import ua.alex.alexweather.entities.WeatherData
+import ua.alex.alexweather.entities.WeatherItemEntity
 
 object WeatherConverter {
     fun convert(data: WeatherData): List<WeatherItemEntity> {

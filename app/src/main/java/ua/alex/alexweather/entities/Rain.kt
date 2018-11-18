@@ -1,4 +1,4 @@
-package ua.alex.alexweather.db.entities
+package ua.alex.alexweather.entities
 
 import android.arch.persistence.room.ColumnInfo
 import android.arch.persistence.room.Entity
@@ -6,12 +6,12 @@ import android.arch.persistence.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
 @Entity
-data class Clouds(
+data class Rain(
 
         @PrimaryKey(autoGenerate = true)
-        var clouds_id: Long,
+        var rain_id: Long,
 
-        @ColumnInfo(name = "all")
-        var all: Int = 0
-
+        @SerializedName("3h")
+        @ColumnInfo(name = "jsonMember3h")
+        var jsonMember3h: Double = 0.toDouble()
 )

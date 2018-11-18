@@ -5,7 +5,7 @@ import android.arch.persistence.room.Insert
 import android.arch.persistence.room.OnConflictStrategy
 import android.arch.persistence.room.Query
 import io.reactivex.Flowable
-import ua.alex.alexweather.db.entities.WeatherItemEntity
+import ua.alex.alexweather.entities.WeatherItemEntity
 
 @Dao
 interface WeatherDao {

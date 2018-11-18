@@ -1,4 +1,4 @@
-//package ua.alex.alexweather.db.entities
+//package ua.alex.alexweather.entities
 //
 //import android.arch.persistence.room.*
 //
@@ -17,7 +17,7 @@
 //        @ColumnInfo(name = "weather")
 //        var weather: List<Weather>? = listOf()
 //)
-package ua.alex.alexweather.db.entities
+package ua.alex.alexweather.entities
 
 import com.google.gson.annotations.SerializedName
 import javax.annotation.Generated

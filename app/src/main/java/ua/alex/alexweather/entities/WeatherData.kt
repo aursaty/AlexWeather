@@ -1,4 +1,4 @@
-//package ua.alex.alexweather.db.entities
+//package ua.alex.alexweather.entities
 //
 //import android.arch.persistence.room.*
 //
@@ -25,7 +25,7 @@
 //        var weather: List<WeatherItemModel>? = listOf()
 //
 //)
-package ua.alex.alexweather.db.entities
+package ua.alex.alexweather.entities
 
 import javax.annotation.Generated
 import com.google.gson.annotations.SerializedName

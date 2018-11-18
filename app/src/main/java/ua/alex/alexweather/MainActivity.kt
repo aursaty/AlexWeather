@@ -6,16 +6,18 @@ import android.os.Bundle
 import android.os.Looper
 import android.support.v4.app.ActivityCompat
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.LinearLayoutManager
 import android.widget.Toast
 import com.google.android.gms.location.*
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.*
+import ua.alex.alexweather.adapter.WeatherAdapter
 import ua.alex.alexweather.api.IWeatherApi
 import ua.alex.alexweather.db.AppDatabase
 import ua.alex.alexweather.db.WeatherConverter
-import ua.alex.alexweather.db.entities.WeatherItemEntity
+import ua.alex.alexweather.entities.WeatherItemEntity
 import ua.alex.alexweather.repository.WeatherRepository
 import ua.alex.alexweather.util.NetworkUtil
 
@@ -92,7 +94,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun updateUI(data: List<WeatherItemEntity>) {
-        tv_location.text = data.size.toString()
+        rv_weather_list.layoutManager = LinearLayoutManager(this)
+
+        rv_weather_list.adapter = WeatherAdapter(data, this)
     }
 
     private fun requestLocation() {

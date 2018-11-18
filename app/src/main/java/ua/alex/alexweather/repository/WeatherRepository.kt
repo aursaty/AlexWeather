@@ -7,8 +7,8 @@ import io.reactivex.schedulers.Schedulers
 import ua.alex.alexweather.api.IWeatherApi
 import ua.alex.alexweather.db.WeatherConverter
 import ua.alex.alexweather.db.WeatherDao
-import ua.alex.alexweather.db.entities.WeatherData
-import ua.alex.alexweather.db.entities.WeatherItemEntity
+import ua.alex.alexweather.entities.WeatherData
+import ua.alex.alexweather.entities.WeatherItemEntity
 
 class WeatherRepository(private val weatherApi: IWeatherApi?, private val weatherDao: WeatherDao) {
 
