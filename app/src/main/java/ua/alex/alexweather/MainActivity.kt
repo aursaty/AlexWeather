@@ -43,7 +43,7 @@ class MainActivity : AppCompatActivity() {
                 "weather-db"
         ).build()
 
-//        if (NetworkUtil.isOnline(this)) {
+        if (NetworkUtil.isOnline(this)) {
             if (ActivityCompat.shouldShowRequestPermissionRationale(this,
                             android.Manifest.permission.ACCESS_FINE_LOCATION))
                 ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), REQUEST_CODE)
@@ -58,15 +58,15 @@ class MainActivity : AppCompatActivity() {
 
                 fusedLocationProviderClient.requestLocationUpdates(locationRequest, locationCallback, Looper.myLooper())
             }
-//        } else {
-//            weatherRepository = WeatherRepository(null, weatherDb.weatherDao())
-//            val compositeDisposable = CompositeDisposable()
-//            compositeDisposable
-//                    .add(weatherRepository.getWeatherFromDb()
-//                            .subscribeOn(Schedulers.io())
-//                            .observeOn(AndroidSchedulers.mainThread())
-//                            .subscribe { updateUI(it) })
-//        }
+        } else {
+            weatherRepository = WeatherRepository(null, weatherDb.weatherDao())
+            val compositeDisposable = CompositeDisposable()
+            compositeDisposable
+                    .add(weatherRepository.getWeatherFromDb()
+                            .subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe { updateUI(it) })
+        }
 
 
     }
